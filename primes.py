@@ -1,12 +1,18 @@
 primeCount = 0
 maxValue = int(input("Print primes up to value: "))
-fullDisplay = input("Display all factors and results? (Y/N): ")
+dispInput = input("Display all factors and results? (Y/N): ")
+
+if dispInput == "Y" or dispInput == "y":
+    fullDisplay = True
+else:
+    fullDisplay = False
+    
 
 for i in range(2,maxValue):
 
     prime = True
 
-    if fullDisplay == "Y" or fullDisplay == "y":
+    if fullDisplay:
         factorList = [1]
         testVal = i
 
@@ -18,7 +24,7 @@ for i in range(2,maxValue):
         if i % j == 0:
 
             prime = False
-            if fullDisplay == "N":
+            if not fullDisplay:
                 break
             else:
                 factorList.append(j)
@@ -26,17 +32,15 @@ for i in range(2,maxValue):
     if prime:
         print(i,end="")
         primeCount += 1
-        if fullDisplay == "Y":
+        if fullDisplay:
             print(": ***PRIME***")
         else:
             print("")
     
-    if prime == False and fullDisplay == "Y":
+    if not prime and fullDisplay:
         factorList.append(i)
         print(f"{i}: ",end="")
         print(*factorList, sep = ",")
 
 print(f"Primes Found: {primeCount}")
 print(f"Prime Density: {(primeCount/maxValue):.3f}")
-
-            
