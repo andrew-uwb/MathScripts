@@ -1,5 +1,24 @@
+import sys
+
 primeCount = 0
-maxValue = int(input("Print primes up to value: "))
+minValue = 2
+maxValue = 2
+
+minValueInput = input("Print primes starting at value: ")
+if minValueInput != "":
+    minValue = int(minValueInput)
+
+maxValueInput = input("Going up to value: ")
+if maxValueInput != "":
+    maxValue = int(maxValueInput)
+else:
+    maxValue = minValue
+
+if minValue > maxValue or minValue < 0 or maxValue < 2:
+    print("Max value must be >= min value and >= 2.")
+    print("Both numbers must be positive.")
+    sys.exit()
+
 dispInput = input("Display all factors and results? (Y/N): ")
 
 if dispInput == "Y" or dispInput == "y":
@@ -7,8 +26,7 @@ if dispInput == "Y" or dispInput == "y":
 else:
     fullDisplay = False
     
-
-for i in range(2,maxValue):
+for i in range(max(2,minValue),maxValue + 1):
 
     prime = True
 
@@ -43,4 +61,4 @@ for i in range(2,maxValue):
         print(*factorList, sep = ",")
 
 print(f"Primes Found: {primeCount}")
-print(f"Prime Density: {(primeCount/maxValue):.3f}")
+print(f"Regional Prime Density: {(primeCount/((maxValue - minValue) + 1)):.3f}")
